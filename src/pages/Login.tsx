@@ -1,20 +1,19 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
-import './Home.css';
+import React from 'react';
 
-const Home: React.FC = () => {
+const Login: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar color="primary">
-          <IonTitle>myApp LIVE</IonTitle>
+          <IonTitle>myApp Login</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <ExploreContainer />
+        Posta Garage Login Page
       </IonContent>
     </IonPage>
   );
 };
 
-export default Home;
+export default Login;
