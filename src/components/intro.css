@@ -1,0 +1,16 @@
+.swiper {
+    height: 100vh;
+}
+
+.swiper-slide {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.swiper-slide img {
+    height: 50vh;
+    margin-bottom: 3rem;
+}
