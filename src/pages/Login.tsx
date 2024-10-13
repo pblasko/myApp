@@ -1,18 +1,21 @@
-import { IonButton, IonCard, IonCardContent, IonContent, IonHeader, IonIcon, IonInput, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import React from 'react';
+import { IonButton, IonCard, IonCardContent, IonContent, IonHeader, IonIcon, IonInput, IonPage, IonTitle, IonToolbar, useIonRouter } from '@ionic/react';
+import React, { useState } from 'react';
 import { logInOutline, personCircleOutline } from 'ionicons/icons';
 import MPL from '../assets/magyar-posta-logo.svg';
 
 const Login: React.FC = () => {
+    // const router = useIonRouter();
+    const [introSeen, setIntroSeen] = useState(false);
     const doLogin = (event: any) => {
         event.preventDefault();
         console.log('do Login');
+        // router.push('/home');
     }
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar color={'primary'}>
-          <IonTitle>myApp Login</IonTitle>
+          <IonTitle>Székesfehérvár Depó</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent scrollY={false}>
