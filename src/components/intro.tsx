@@ -1,6 +1,6 @@
 import { IonButton, IonCard, IonCardContent, IonContent, IonHeader, IonIcon, IonInput, IonPage, IonText, IonTitle, IonToolbar, useIonRouter } from '@ionic/react';
 import React, { useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 import intro from '../assets/intro.jpg';
 import intro2 from '../assets/intro2.jpg';
 import './intro.css';
@@ -10,7 +10,12 @@ interface ContainerProps {
     onFinish: () => void;
 }
 
-const Intro: React.FC<ContainerProps> = () => {
+const SwiperButtonNext = ({children}: any) => {
+  const swiper = useSwiper();
+  return <IonButton onClick={() => swiper.slideNext()}>{children}</IonButton>
+}
+
+const Intro: React.FC<ContainerProps> = ({ onFinish }) => {
   return (
     <Swiper>
       <SwiperSlide>
@@ -18,12 +23,14 @@ const Intro: React.FC<ContainerProps> = () => {
         <IonText>
             <h3>Előre</h3>
         </IonText>
+        <SwiperButtonNext>Next</SwiperButtonNext>
       </SwiperSlide>
       <SwiperSlide>
         <img src={intro2} alt='intro 2' />
         <IonText>
             <h3>Ne hátra</h3>
         </IonText>
+        <IonButton onClick={() => onFinish()}>Finish</IonButton>
       </SwiperSlide>
     </Swiper>
   )

@@ -1,8 +1,11 @@
 import { IonButton, IonCard, IonCardContent, IonContent, IonHeader, IonIcon, IonInput, IonPage, IonTitle, IonToolbar, useIonRouter } from '@ionic/react';
-import React, { useState } from 'react';
-import { logInOutline, personCircleOutline } from 'ionicons/icons';
+import React, { useEffect, useState } from 'react';
+import { logInOutline, personCircleOutline, videocamOutline } from 'ionicons/icons';
 import MPL from '../assets/magyar-posta-logo.svg';
 import Intro from '../components/intro';
+import { Preferences } from '@capacitor/preferences';
+
+const INTRO_KEY = 'intro-seen';
 
 const Login: React.FC = () => {
     // const router = useIonRouter();
@@ -13,8 +16,20 @@ const Login: React.FC = () => {
         // router.push('/home');
     }
     const finishIntro = async() => {
-      console.log('FIN');
+      await Preferences.set({ key: INTRO_KEY, value: 'true' });
+      setIntroSeen(true);
     }
+    const showIntroAgain = async() => {
+      await Preferences.remove({ key: INTRO_KEY });
+      setIntroSeen(false);
+    }
+    useEffect (() => {
+      const checkStorage = async () => {
+        const seen = await Preferences.get({key: INTRO_KEY});
+        setIntroSeen(seen.value === 'true');
+      }
+      checkStorage();
+    }, [])
   return (
     <>
       {!introSeen ? (
@@ -23,7 +38,7 @@ const Login: React.FC = () => {
         <IonPage>
           <IonHeader>
             <IonToolbar color={'primary'}>
-              <IonTitle>Székesfehérvár Depó</IonTitle>
+              <IonTitle>Székesfehérvár</IonTitle>
             </IonToolbar>
           </IonHeader>
           <IonContent scrollY={false}>
@@ -42,6 +57,10 @@ const Login: React.FC = () => {
                         <IonButton routerLink='/register' color={'secondary'} type='button' expand='block' className='ion-margin-top'>
                             Create Account
                             <IonIcon icon={personCircleOutline} slot="end" />
+                        </IonButton>
+                        <IonButton onClick={showIntroAgain} fill='clear' size='small' color={'medium'} type='button' expand='block' className='ion-margin-top'>
+                            Watch intro again
+                            <IonIcon icon={videocamOutline} slot="end" />
                         </IonButton>
                     </form>
                 </IonCardContent>
