@@ -1,7 +1,7 @@
-import { IonButton, IonCard, IonCardContent, IonContent, IonHeader, IonIcon, IonInput, IonPage, IonText, IonTitle, IonToolbar, useIonRouter } from '@ionic/react';
-import React, { useState } from 'react';
+import { IonButton, IonText } from '@ionic/react';
+import React from 'react';
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
-import intro from '../assets/intro.jpg';
+import intro1 from '../assets/intro1.jpg';
 import intro2 from '../assets/intro2.jpg';
 import './intro.css';
 import 'swiper/css';
@@ -19,7 +19,7 @@ const Intro: React.FC<ContainerProps> = ({ onFinish }) => {
   return (
     <Swiper>
       <SwiperSlide>
-        <img src={intro} alt='intro 1' />
+        <img src={intro1} alt='intro 1' />
         <IonText>
             <h3>Előre</h3>
         </IonText>
