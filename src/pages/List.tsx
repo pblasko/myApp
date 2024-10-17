@@ -1,13 +1,33 @@
-import { IonBackButton, IonButton, IonCard, IonCardContent, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonInput, IonPage, IonRow, IonTitle, IonToolbar, useIonRouter } from '@ionic/react';
-import React from 'react';
+import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar, useIonViewWillEnter } from '@ionic/react';
+import React, {useState} from 'react';
 
 const List: React.FC = () => {
+  const [users, setUsers] = useState<any []>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  useIonViewWillEnter(() => {
+    const fetchUsers = async () => {
+      const users = await getUsers();
+      console.log(users);
+      setUsers(users);
+    };
+    fetchUsers();
+  });
+  const getUsers = async () => {
+    const data = await fetch ('https://randomuser.me/api?results=10');
+    const users = await data.json();
+    return users;
+  }
   return (
     <IonPage>
       <IonHeader>
-        LIST
+        <IonToolbar color={'primary'}>
+          <IonButtons slot='start'>
+            <IonMenuButton />
+          </IonButtons>
+          <IonTitle>List</IonTitle>
+        </IonToolbar>
       </IonHeader>
-      <IonContent scrollY={false}>
+      <IonContent className='ion-padding'>
         List items
       </IonContent>
     </IonPage>
